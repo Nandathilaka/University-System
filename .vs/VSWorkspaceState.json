@@ -1,9 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\UniversitySystem",
-    "\\UniversitySystem\\DAL"
+    "\\Parttime"
   ],
-  "SelectedNode": "\\UniversitySystem\\DAL\\UniversityContext.cs",
+  "SelectedNode": "\\Parttime",
   "PreviewInSolutionExplorer": false
 }
