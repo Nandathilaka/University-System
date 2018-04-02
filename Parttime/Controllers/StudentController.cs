@@ -16,9 +16,31 @@ namespace Parttime.Controllers
         private UniversityContext db = new UniversityContext();
 
         // GET: Student
-        public ActionResult Index()
+        public ActionResult Index(String sortOrder, string searchString)
         {
-            return View(db.Students.ToList());
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            var students = from s in db.Students select s;
+
+            //Search Box 
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                students = students.Where(s => s.LastName.Contains(searchString) || s.FirstMidname.Contains(searchString));
+            }
+
+            //Sort Order by First Name and Enrollment Date
+            switch (sortOrder)
+            {
+                case "name_desc": students.OrderByDescending(s => s.FirstMidname);
+                    break;
+                case "Date": students.OrderBy(s => s.EnrollmentDate);
+                    break;
+                case "date_desc": students.OrderBy(s => s.EnrollmentDate);
+                    break;
+                default: students = students.OrderBy(s => s.LastName);
+                    break;
+            }
+            return View(students.ToList());
         }
 
         // GET: Student/Details/5
