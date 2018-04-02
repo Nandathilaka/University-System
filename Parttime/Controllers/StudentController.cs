@@ -47,15 +47,23 @@ namespace Parttime.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,FirstMidname,LastName,EnrollmentDate")] Student student)
+        public ActionResult Create([Bind(Include = "FirstMidname,LastName,EnrollmentDate")] Student student)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Students.Add(student);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Students.Add(student);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
-
+            catch (DataException /*dex */)
+            {
+                //Log the Error
+                ModelState.AddModelError("","Unable to the save. Try again, and if the problem see your system administrator.");
+            }
+            
             return View(student);
         }
 
@@ -77,7 +85,32 @@ namespace Parttime.Controllers
         // POST: Student/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditPost(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var studentToUpdate = db.Students.Find(id);
+            if (TryUpdateModel(studentToUpdate, "", new string[] {"LastName","FirstMidName","EnrollmentDate" })) ;
+            {
+                try {
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (DataException)
+                {
+                    //Log the error
+                    ModelState.AddModelError("","Unable to save change. Try again, and if the problem persists, see your system administrator.");
+                }
+            }
+            return View(studentToUpdate);
+        }
+
+
+       /* [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,FirstMidname,LastName,EnrollmentDate")] Student student)
         {
@@ -89,6 +122,7 @@ namespace Parttime.Controllers
             }
             return View(student);
         }
+        */
 
         // GET: Student/Delete/5
         public ActionResult Delete(int? id)
