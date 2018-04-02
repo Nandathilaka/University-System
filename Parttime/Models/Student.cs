@@ -11,7 +11,6 @@ namespace Parttime.Models
         public string FirstMidname { get; set; }
         public string LastName { get; set; }
         public DateTime EnrollmentDate { get; set; }
-        public string Secret { get; set; }
 
         public virtual ICollection<Enrollment> Enrollments{ get; set; }
     }

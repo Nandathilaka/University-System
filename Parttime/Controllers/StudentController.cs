@@ -47,22 +47,15 @@ namespace Parttime.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "FirstMidname,LastName,EnrollmentDate")] Student student)
+        public ActionResult Create([Bind(Include = "ID,FirstMidname,LastName,EnrollmentDate")] Student student)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    db.Students.Add(student);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
+                db.Students.Add(student);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            catch(DataException /* dex*/)
-            {
-                ModelState.AddModelError("","Unable to save Changes. Try again , and if the problem persists see your system Administrator.");
 
-            }
             return View(student);
         }
 
