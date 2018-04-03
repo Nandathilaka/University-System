@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Parttime.DAL;
 using Parttime.Models;
+using PagedList;
 
 namespace Parttime.Controllers
 {
@@ -16,11 +17,23 @@ namespace Parttime.Controllers
         private UniversityContext db = new UniversityContext();
 
         // GET: Student
-        public ActionResult Index(String sortOrder, string searchString)
+        public ActionResult Index(String sortOrder, string currentFilter, string searchString, int? page)
         {
+            ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
             var students = from s in db.Students select s;
+
+            //Add paging Functionality
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewBag.CurrenFilter = searchString;
 
             //Search Box 
             if (!String.IsNullOrEmpty(searchString))
@@ -40,7 +53,10 @@ namespace Parttime.Controllers
                 default: students = students.OrderBy(s => s.LastName);
                     break;
             }
-            return View(students.ToList());
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(students.ToPagedList(pageNumber, pageSize));
+            //return View(students.ToList());
         }
 
         // GET: Student/Details/5
