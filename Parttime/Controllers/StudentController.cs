@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using Parttime.DAL;
 using Parttime.Models;
 using PagedList;
+using System.Data.Entity.Infrastructure;
 
 namespace Parttime.Controllers
 {
@@ -96,7 +97,7 @@ namespace Parttime.Controllers
                     return RedirectToAction("Index");
                 }
             }
-            catch (DataException /*dex */)
+            catch (RetryLimitExceededException /*dex */)
             {
                 //Log the Error
                 ModelState.AddModelError("", "Unable to the save. Try again, and if the problem see your system administrator.");
@@ -139,7 +140,7 @@ namespace Parttime.Controllers
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-                catch (DataException)
+                catch (RetryLimitExceededException /*dex*/)
                 {
                     //Log the error
                     ModelState.AddModelError("", "Unable to save change. Try again, and if the problem persists, see your system administrator.");
@@ -196,7 +197,7 @@ namespace Parttime.Controllers
                 //db.Students.Remove(student);
                 db.SaveChanges();
             }
-            catch (DataException)
+            catch (RetryLimitExceededException)
             {
                 //log the Error
                 return RedirectToAction("Delete", new { id = id, saveChangesError = true });
