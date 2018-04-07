@@ -97,3 +97,5 @@ D:\UCSC\3rd Year\Projects\UniversitySystem\Parttime\bin\PagedList.dll
 D:\UCSC\3rd Year\Projects\UniversitySystem\Parttime\bin\PagedList.Mvc.dll
 D:\UCSC\3rd Year\Projects\UniversitySystem\Parttime\bin\PagedList.xml
 D:\UCSC\3rd Year\Projects\UniversitySystem\Parttime\bin\PagedList.Mvc.xml
+D:\UCSC\3rd Year\Projects\UniversitySystem\Parttime\obj\Debug\Parttime.Migrations.InitialCreate.resources
+D:\UCSC\3rd Year\Projects\UniversitySystem\Parttime\obj\Debug\UniversitySystem.csproj.GenerateResource.cache
