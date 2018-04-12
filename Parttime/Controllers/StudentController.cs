@@ -39,13 +39,13 @@ namespace Parttime.Controllers
             //Search Box 
             if (!String.IsNullOrEmpty(searchString))
             {
-                students = students.Where(s => s.LastName.Contains(searchString) || s.FirstMidname.Contains(searchString));
+                students = students.Where(s => s.LastName.Contains(searchString) || s.FirstMidName.Contains(searchString));
             }
 
             //Sort Order by First Name and Enrollment Date
             switch (sortOrder)
             {
-                case "name_desc": students.OrderByDescending(s => s.FirstMidname);
+                case "name_desc": students.OrderByDescending(s => s.FirstMidName);
                     break;
                 case "Date": students.OrderBy(s => s.EnrollmentDate);
                     break;
@@ -86,7 +86,7 @@ namespace Parttime.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "FirstMidname,LastName,EnrollmentDate")] Student student)
+        public ActionResult Create([Bind(Include = "FirstMidName,LastName,EnrollmentDate")] Student student)
         {
             try
             {

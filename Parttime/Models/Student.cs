@@ -14,7 +14,7 @@ namespace Parttime.Models
         [Display(Name ="First Name")]
         [StringLength(50,ErrorMessage ="First Name cannot be longer than 50 Characters.",MinimumLength =1)]
         [Column("FirstName")]
-        public string FirstMidname { get; set; }
+        public string FirstMidName { get; set; }
         [Required]
         [StringLength(50,MinimumLength =1)]
         [Display(Name = "Last Name")]
@@ -30,7 +30,7 @@ namespace Parttime.Models
         {
             get
             {
-                return FirstMidname + "," + LastName;
+                return FirstMidName + "," + LastName;
             }
         }
 

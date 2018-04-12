@@ -12,14 +12,14 @@ namespace Parttime.DAL
         {
             var student = new List<Student>
             {
-                new Student{FirstMidname="Thilina",LastName="Chamika",EnrollmentDate=DateTime.Parse("2005-09-01") },
-                new Student{FirstMidname="Sameera",LastName="Nandathilaka",EnrollmentDate=DateTime.Parse("2007-08-05") },
-                new Student{FirstMidname="Hansini",LastName="Indrachapa",EnrollmentDate=DateTime.Parse("2006-01-07") },
-                new Student{FirstMidname="Sumana",LastName="Thilaka",EnrollmentDate=DateTime.Parse("1994-01-23") },
-                new Student{FirstMidname="Nandawathi",LastName="Nandawathi",EnrollmentDate=DateTime.Parse("2005-12-14") },
-                new Student{FirstMidname="Dinusha",LastName="Priyadarshani",EnrollmentDate=DateTime.Parse("2010-08-23") },
-                new Student{FirstMidname="Nuwan",LastName="Kumara",EnrollmentDate=DateTime.Parse("1993-08-23") },
-                new Student{FirstMidname="Saman",LastName="Kumara",EnrollmentDate=DateTime.Parse("1992-07-03") },
+                new Student{FirstMidName="Thilina",LastName="Chamika",EnrollmentDate=DateTime.Parse("2005-09-01") },
+                new Student{FirstMidName="Sameera",LastName="Nandathilaka",EnrollmentDate=DateTime.Parse("2007-08-05") },
+                new Student{FirstMidName="Hansini",LastName="Indrachapa",EnrollmentDate=DateTime.Parse("2006-01-07") },
+                new Student{FirstMidName="Sumana",LastName="Thilaka",EnrollmentDate=DateTime.Parse("1994-01-23") },
+                new Student{FirstMidName="Nandawathi",LastName="Nandawathi",EnrollmentDate=DateTime.Parse("2005-12-14") },
+                new Student{FirstMidName="Dinusha",LastName="Priyadarshani",EnrollmentDate=DateTime.Parse("2010-08-23") },
+                new Student{FirstMidName="Nuwan",LastName="Kumara",EnrollmentDate=DateTime.Parse("1993-08-23") },
+                new Student{FirstMidName="Saman",LastName="Kumara",EnrollmentDate=DateTime.Parse("1992-07-03") },
 
             };
             student.ForEach(s => context.Students.Add(s));
